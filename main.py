@@ -25,23 +25,27 @@ class Acessoria(BaseModel):
 
 
 # Temporario
-empresa = []
-acessoria = []
+empresas = []
+acessorias = []
 # ----------
 
-# empresa
-@app.post("/cad_empresa/", response_model=Empresa)
-def create_item(empresas: Empresa):
+
+@app.post("/empresa/", response_model=Empresa)
+def create_item(empresa: Empresa):
     
-    if any(existing_empresas.id == empresas.id for existing_empresas in empresa):
+    if any(existing_empresa.id == empresa.id for existing_empresa in empresas):
         raise HTTPException(status_code=400, detail="ID já existe")
     
-    if any(existing_empresas.cnpj == empresas.cnpj for existing_empresas in empresa):
+    if any(existing_empresa.cnpj == empresa.cnpj for existing_empresa in empresas):
         raise HTTPException(status_code=400, detail="CNPJ já existe")
     
-    empresa.append(empresas)
+    empresas.append(empresas)
     return empresas
 
+
+@app.get("/empresa/", response_model=List[Empresa])
+def get_items():
+    return empresas
 
 
 # MENSSGAEN DE TESTE
