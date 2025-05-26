@@ -1,9 +1,8 @@
-# Versão 1.2
-
-from uvicorn import run
+# Versão 1.3
+import uvicorn
+import typing
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from typing import List
 
 app = FastAPI()
 
@@ -31,21 +30,31 @@ acessorias = []
 
 
 @app.post("/empresa/", response_model=Empresa)
-def create_item(empresa: Empresa):
-    
-    if any(existing_empresa.id == empresa.id for existing_empresa in empresas):
-        raise HTTPException(status_code=400, detail="ID já existe")
-    
-    if any(existing_empresa.cnpj == empresa.cnpj for existing_empresa in empresas):
-        raise HTTPException(status_code=400, detail="CNPJ já existe")
-    
-    empresas.append(empresas)
-    return empresas
+def create_empresa(empresa: Empresa):
+    empresas.append(empresa)
+    return empresa
 
 
-@app.get("/empresa/", response_model=List[Empresa])
+@app.get("/empresa/", response_model=typing.List[Empresa])
 def get_items():
     return empresas
+
+
+@app.get("/empresa/{empresa_id}", response_model=Empresa)
+def get_empresa(empresa_id: int):
+    for empresa in empresas:
+        if empresa.id == empresa_id:
+            return empresa
+    raise HTTPException(status_code=404, detail="empresa não encontrada")
+
+
+@app.put("/empresa/{empresa_id}", response_model=Empresa)
+def update_empresa(empresa_id: int, updated_empresa: Empresa):
+    for index, empresa in enumerate(empresas):
+        if empresa.id == empresa_id:
+            empresas[index] = updated_empresa
+            return updated_empresa
+    raise HTTPException(status_code=404, detail="Empresa não encontrada")
 
 
 # MENSSGAEN DE TESTE
@@ -55,4 +64,4 @@ def teste():
 # ------------------
 
 if __name__ == "__main__":
-    run(app, port=8000)
+    uvicorn.run(app, port=8000)
