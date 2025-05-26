@@ -52,6 +52,15 @@ def update_empresa(empresa_id: int, updated_empresa: Empresa):
     raise HTTPException(status_code=404, detail="Empresa não encontrada")
 
 
+@app.delete("/empresa/{empresa_id}", response_model=Empresa)
+def delete_empresa(empresa_id: int):
+    for index, empresa in enumerate(empresas):
+        if empresa.id == empresa_id:
+            deleted = empresas.pop(index)
+            return deleted
+    raise HTTPException(status_code=404, detail="Empresa não encontrada")
+
+
 # MENSSGAEN DE TESTE
 @app.get("/")
 def teste():
