@@ -3,6 +3,7 @@ Objetivo principal:
     Criar uma API (Python) para acessar um banco de dados (PostegreSQL)
 
 Blibliotecas:
+
     - FastAPI
     - Uvicorn
     - Pydantic
@@ -12,6 +13,7 @@ Blibliotecas:
 
 
 Nota da versão 1.1: 
+
     - Implementação de objetos (classes):
         Empresas
         Acessoria
