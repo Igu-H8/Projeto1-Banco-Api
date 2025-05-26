@@ -22,5 +22,17 @@ Nota da versão 1.1:
 
 
 Nota da versão 1.2:
+
     - Implementação da visualização (READ)
-    
+
+
+Nota da versão 1.3:
+
+    - Implementação da atualização (UPDATE)
+
+
+Nota da versão 1.4:
+
+    - Implementação da remoção (REMOVE)
+    - Correção de bugs de versão 
+            

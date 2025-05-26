@@ -1,4 +1,4 @@
-# Versão 1.3
+# Versão 1.4
 import uvicorn
 import typing
 from fastapi import FastAPI, HTTPException
@@ -10,10 +10,10 @@ app = FastAPI()
 class Empresa(BaseModel):
     id: int
     name: str
-    cnpj: int
+    cnpj: str
     endereco: str
     email: str
-    telefone: int
+    telefone: str 
 
 
 class Acessoria(BaseModel):
@@ -33,11 +33,6 @@ acessorias = []
 def create_empresa(empresa: Empresa):
     empresas.append(empresa)
     return empresa
-
-
-@app.get("/empresa/", response_model=typing.List[Empresa])
-def get_items():
-    return empresas
 
 
 @app.get("/empresa/{empresa_id}", response_model=Empresa)
