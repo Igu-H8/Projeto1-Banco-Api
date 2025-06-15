@@ -6,9 +6,8 @@ Objetivo principal:
 - FastAPI
 - Uvicorn
 - Pydantic
-- Typing
 - SQLAlchemy
-- Psycopg2
+- Psycopg2-binary
 
 
 #### Nota da versão 1.1: 
@@ -34,4 +33,9 @@ Objetivo principal:
 
 - Implementação da remoção (REMOVE)
 - Correção de bugs de versão 
+
+
+#### Nota da versão 1.5:
+
+- Implementação da comunicação com o banco de dados PostgreSQL  
         

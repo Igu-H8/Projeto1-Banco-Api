@@ -1,11 +1,35 @@
-# Versão 1.4
+# Versão 1.5
+
 import uvicorn
-import typing
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Depends
 from pydantic import BaseModel
+from sqlalchemy.orm import Session
+from sqlalchemy import text
+from database import get_db
 
 app = FastAPI()
 
+
+@app.get("/testar")
+def testar_conexao(db: Session = Depends(get_db)):
+    try:
+        resultado = db.execute(text("SELECT 1")).fetchone()
+        return {"status": "conectado", "resultado": resultado[0]}
+    except Exception as e:
+        return {"status": "erro", "detalhe": str(e)}
+
+
+"""
+CREATE TABLE empresas (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    cnpj VARCHAR(14) UNIQUE NOT NULL,
+    endereco VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    telefone VARCHAR(20)
+);
+
+"""
 
 class Empresa(BaseModel):
     id: int
@@ -15,6 +39,15 @@ class Empresa(BaseModel):
     email: str
     telefone: str 
 
+"""
+CREATE TABLE acessorias (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    periodicidade VARCHAR(100),
+    empresa_id INT NOT NULL,
+    FOREIGN KEY (empresa_id) REFERENCES empresas(id)
+);
+"""
 
 class Acessoria(BaseModel):
     id: int
@@ -61,7 +94,7 @@ def delete_empresa(empresa_id: int):
     raise HTTPException(status_code=404, detail="Empresa não encontrada")
 
 
-# MENSSGAEN DE TESTE
+# MENSSAGEM DE TESTE
 @app.get("/")
 def teste():
     return "A api esta no ar!"
