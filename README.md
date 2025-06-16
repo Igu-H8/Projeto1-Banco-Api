@@ -38,4 +38,9 @@ Objetivo principal:
 #### Nota da versão 1.5:
 
 - Implementação da comunicação com o banco de dados PostgreSQL  
+
+#### Nota da versão 1.6:
+
+- Implementação definitiva Banco -> API
+- Correção na organização de arquivos
         
