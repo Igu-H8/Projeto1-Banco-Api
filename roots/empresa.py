@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/empresas", response_model=EmpresaOut)
 def criar_empresa(empresa: EmpresaCreate, db: Session = Depends(get_db)):
-    db_empresa = Empresa(**empresa.dict())
+    db_empresa = Empresa(**empresa.model_dump())
     db.add(db_empresa)
     db.commit()
     db.refresh(db_empresa)
