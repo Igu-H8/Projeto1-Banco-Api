@@ -1,6 +1,45 @@
+
+# Manual de Inicialização
+
+Os comandos a seguir deveram ser executados no local do arquivo onde foram instalados/clonados!
+
+
+#### Comandos de criação de um ambiente virtual (opcional):
+
+- Windows:
+
+```
+python -m venv nome_do_ambiente
+
+nome_do_ambiente\Scripts\activate
+```
+
+- Linux:
+
+```
+python -m venv nome_do_ambiente
+
+source nome_do_ambiente/bin/activate
+```
+
+
+#### Comando de Instalação das blibliotecas do projeto:
+
+```
+pip install -r requirements.txt
+```
+
+
+#### Comando de execução:
+```
+uvicorn main:app --reload
+```
+
+
 # Projeto1-Banco-Api
 Objetivo principal:
     Criar uma API (Python) para acessar um banco de dados (PostegreSQL)
+
 
 #### Blibliotecas:
 - FastAPI
@@ -43,4 +82,9 @@ Objetivo principal:
 
 - Implementação definitiva Banco -> API
 - Correção na organização de arquivos
-        
+
+
+#### Nota da versão 1.7:
+
+- Implementação do CRUD de acessorias
+- Correção nas normas de escrita (padronização de código)
